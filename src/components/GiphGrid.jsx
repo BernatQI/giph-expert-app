@@ -1,15 +1,24 @@
-import { useEffect } from "react";
-import { getGiphs } from "../helpers/getGiphs";
+import { useFetchGifs } from "../hooks/useFetchGifs";
+import { GiphItem } from "./GiphItem";
 
 export const GiphGrid = ({category}) => {
 
-  useEffect(() => {
-    getGiphs(category);
-  }, [])
+  const {images, isLoading} = useFetchGifs(category)
 
   return(
-    <article>
-      <h3 className="GiphGrid-title">{category}</h3>
-    </article>
+    <>
+      <h2 className="GiphGrid-title">{category}</h2>
+      {
+        isLoading && (<p>Loading...</p>)
+      }
+      <article className="card-grid">
+      {images.map(({id, title, url}) => (
+        <GiphItem
+          key={id}
+          title={title}
+          url={url} />
+    ))}
+      </article>
+    </>
   )
 }

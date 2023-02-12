@@ -12,14 +12,15 @@ export const AddCategory = ({onNewCategory}) => {
     event.preventDefault();
     const value = inputValue.trim();
 
-    if(value.length <= 1) return;
-
-    onNewCategory(value);
-    setInputValue('');
+    if(!value.length <= 1) {
+      setInputValue('');
+      onNewCategory(value);
+    }
   }
 
   return(
-    <form onSubmit={event => onSubmit(event)}>
+    <form onSubmit={onSubmit} className="gif-form">
+      <button type="submit">Add Category</button>
       <input
         type='text'
         placeholder='Search Giphs...'

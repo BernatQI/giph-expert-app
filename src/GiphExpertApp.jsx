@@ -1,12 +1,11 @@
-import { AddCategory } from "./components/AddCategory";
 import { useState } from "react";
-import { GiphGrid } from "./components/GiphGrid";
+import { GiphGrid, AddCategory } from "./components";
 
 export const GiphExpertApp = () => {
 
   const [categories, setCategories] = useState(['Dev']);
 
-  const addCategory = (newCategory) => {
+  const addCategory = newCategory => {
     if(!categories.includes( newCategory )) {
       setCategories([newCategory, ...categories]);
     }
@@ -16,7 +15,7 @@ export const GiphExpertApp = () => {
     <>
       <h1>Giphs App</h1>
       <AddCategory 
-      onNewCategory={addCategory} />
+      onNewCategory={value => addCategory(value)} />
         {
           categories.map(category => (
               <GiphGrid 
